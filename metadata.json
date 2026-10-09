@@ -1,0 +1,6 @@
+{
+  "name": "Scrutium AI App Download Portal",
+  "description": "Official download portal for Scrutium AI apps across supported platforms including Android and Windows. Intelligence that moves with you.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

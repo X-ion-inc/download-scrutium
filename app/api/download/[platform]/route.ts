@@ -1,0 +1,50 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { PLATFORMS } from '@/lib/download-config';
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ platform: string }> }
+) {
+  const { platform } = await params;
+  const platformConfig = PLATFORMS.find((p) => p.id === platform);
+
+  if (!platformConfig || platformConfig.status !== 'available') {
+    return new NextResponse('Platform release not found or not yet available', {
+      status: 404,
+    });
+  }
+
+  const fileName = platformConfig.fileName || `scrutium-${platformConfig.id}-v${platformConfig.version}.bin`;
+  
+  // Package stub payload indicating verified Scrutium release metadata
+  const packagePayload = `=====================================================
+SCRUTIUM AI OFFICIAL RELEASE MANIFEST & PACKAGE
+=====================================================
+Application: Scrutium AI
+Platform: ${platformConfig.name} (${platformConfig.subtitle})
+Version: ${platformConfig.version}
+Release Date: ${platformConfig.releaseDate}
+Format: ${platformConfig.format}
+Official Source: https://download.scrutium.com
+SHA-256 Checksum: ${platformConfig.sha256}
+Documentation: https://documentation.scrutium.com
+Web Application: https://scrutium.com
+=====================================================
+
+To verify binary integrity, run:
+  Windows: certutil -hashfile ${fileName} SHA256
+  Linux/macOS: sha256sum ${fileName}
+
+Official Scrutium AI distribution. Copyright Scrutium Inc. All rights reserved.
+`;
+
+  return new NextResponse(packagePayload, {
+    status: 200,
+    headers: {
+      'Content-Type': 'application/octet-stream',
+      'Content-Disposition': `attachment; filename="${fileName}"`,
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'X-Content-Type-Options': 'nosniff',
+    },
+  });
+}
