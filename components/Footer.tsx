@@ -3,11 +3,7 @@
 import { ArrowUpRight } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/download-config';
 
-interface FooterProps {
-  onOpenDeployGuide?: () => void;
-}
-
-export default function Footer({ onOpenDeployGuide }: FooterProps) {
+export default function Footer() {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -60,14 +56,6 @@ export default function Footer({ onOpenDeployGuide }: FooterProps) {
               <span>Documentation</span>
               <ArrowUpRight className="w-3 h-3 text-neutral-500" />
             </a>
-            {onOpenDeployGuide && (
-              <button
-                onClick={onOpenDeployGuide}
-                className="hover:text-white transition-colors cursor-pointer text-neutral-400"
-              >
-                DNS & Deployment Guide
-              </button>
-            )}
           </div>
         </div>
 

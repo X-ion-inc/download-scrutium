@@ -5,11 +5,7 @@ import Link from 'next/link';
 import { Menu, X, ArrowUpRight, Download } from 'lucide-react';
 import { SITE_CONFIG } from '@/lib/download-config';
 
-interface NavbarProps {
-  onOpenDeployGuide?: () => void;
-}
-
-export default function Navbar({ onOpenDeployGuide }: NavbarProps) {
+export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollTo = (id: string) => {
@@ -136,17 +132,6 @@ export default function Navbar({ onOpenDeployGuide }: NavbarProps) {
             >
               Try on Web (scrutium.com)
             </a>
-            {onOpenDeployGuide && (
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenDeployGuide();
-                }}
-                className="w-full text-center py-1.5 text-[11px] text-neutral-500 hover:text-neutral-300 transition-colors"
-              >
-                DNS & Deployment Instructions
-              </button>
-            )}
           </div>
         </div>
       )}
