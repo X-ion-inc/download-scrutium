@@ -1,7 +1,7 @@
 /**
  * Centralized Configuration for Scrutium AI Official Download Portal
  * 
- * Production Base URL: https://download.scrutium.com
+ * Production Base URL: https://downloads.scrutium.com
  * Try on Web: https://scrutium.com
  * Documentation: https://documentation.scrutium.com
  */
@@ -22,7 +22,7 @@ export interface PlatformRelease {
 
 export const SITE_CONFIG = {
   name: 'Scrutium AI',
-  domain: 'https://download.scrutium.com',
+  domain: 'https://downloads.scrutium.com',
   webAppUrl: 'https://scrutium.com',
   docsUrl: 'https://documentation.scrutium.com',
   supportEmail: 'support@scrutium.com',

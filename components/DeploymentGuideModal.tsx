@@ -37,7 +37,7 @@ export default function DeploymentGuideModal({ isOpen, onClose }: DeploymentGuid
               </h2>
             </div>
             <p className="text-xs text-neutral-400 mt-0.5">
-              Complete steps to deploy and connect <span className="text-neutral-200 font-mono">download.scrutium.com</span> via Cloudflare.
+              Complete steps to deploy and connect <span className="text-neutral-200 font-mono">downloads.scrutium.com</span> via Cloudflare.
             </p>
           </div>
           <button
@@ -66,6 +66,9 @@ export default function DeploymentGuideModal({ isOpen, onClose }: DeploymentGuid
                 <p><span className="text-neutral-500">Build Output Directory:</span> .next</p>
                 <p><span className="text-neutral-500">Node.js Version:</span> 20 or 22</p>
               </div>
+              <p className="text-[11px] text-neutral-400">
+                *(Note: The build script automatically cleans `.next/cache` to prevent Cloudflare&apos;s 25 MiB file size limit error).*
+              </p>
             </div>
           </section>
 
@@ -80,9 +83,9 @@ export default function DeploymentGuideModal({ isOpen, onClose }: DeploymentGuid
             </p>
             <div className="pl-7">
               <div className="flex items-center justify-between bg-neutral-950 border border-neutral-800 rounded px-3 py-2 font-mono text-xs text-neutral-300">
-                <code>APP_URL = https://download.scrutium.com</code>
+                <code>APP_URL = https://downloads.scrutium.com</code>
                 <button
-                  onClick={() => handleCopy('https://download.scrutium.com', 'env-val')}
+                  onClick={() => handleCopy('https://downloads.scrutium.com', 'env-val')}
                   className="text-neutral-400 hover:text-white transition-colors cursor-pointer"
                   title="Copy value"
                 >
@@ -96,16 +99,16 @@ export default function DeploymentGuideModal({ isOpen, onClose }: DeploymentGuid
           <section className="space-y-2">
             <div className="flex items-center gap-2 text-white font-medium">
               <span className="w-5 h-5 rounded bg-neutral-900 border border-neutral-800 text-neutral-400 flex items-center justify-center text-[11px] font-mono">3</span>
-              <h3>Attach Custom Subdomain: download.scrutium.com</h3>
+              <h3>Attach Custom Subdomain: downloads.scrutium.com</h3>
             </div>
             <p className="text-neutral-400 pl-7 leading-relaxed">
               Under your Cloudflare Pages project $\rightarrow$ <strong>Custom domains</strong>, click <strong>Set up a custom domain</strong> and enter:
             </p>
             <div className="pl-7">
               <div className="flex items-center justify-between bg-neutral-950 border border-neutral-800 rounded px-3 py-2 font-mono text-xs text-neutral-300">
-                <code>download.scrutium.com</code>
+                <code>downloads.scrutium.com</code>
                 <button
-                  onClick={() => handleCopy('download.scrutium.com', 'domain-val')}
+                  onClick={() => handleCopy('downloads.scrutium.com', 'domain-val')}
                   className="text-neutral-400 hover:text-white transition-colors cursor-pointer"
                   title="Copy domain"
                 >
@@ -142,9 +145,9 @@ export default function DeploymentGuideModal({ isOpen, onClose }: DeploymentGuid
             </p>
             <div className="pl-7">
               <div className="flex items-center justify-between bg-neutral-950 border border-neutral-800 rounded px-3 py-2 font-mono text-xs text-neutral-300">
-                <code>https://download.scrutium.com/sitemap.xml</code>
+                <code>https://downloads.scrutium.com/sitemap.xml</code>
                 <button
-                  onClick={() => handleCopy('https://download.scrutium.com/sitemap.xml', 'sitemap-val')}
+                  onClick={() => handleCopy('https://downloads.scrutium.com/sitemap.xml', 'sitemap-val')}
                   className="text-neutral-400 hover:text-white transition-colors cursor-pointer"
                   title="Copy sitemap URL"
                 >

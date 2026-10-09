@@ -1,6 +1,6 @@
 # Scrutium — Official App Download Portal
 
-The dedicated, production-ready application download website for **Scrutium AI** (`https://download.scrutium.com`).
+The dedicated, production-ready application download website for **Scrutium AI** (`https://downloads.scrutium.com`).
 
 Built with design restraint inspired by industry-leading product software distributions: clean typographic hierarchy, generous whitespace, straightforward platform downloads, authentic product capabilities, and immediate web access.
 
@@ -12,7 +12,7 @@ This download portal operates independently from the main Scrutium web applicati
 
 | Property | URL | Role |
 | :--- | :--- | :--- |
-| **Download Portal** (This Project) | [`https://download.scrutium.com`](https://download.scrutium.com) | Standalone client downloads & SHA-256 verification |
+| **Download Portal** (This Project) | [`https://downloads.scrutium.com`](https://downloads.scrutium.com) | Standalone client downloads & SHA-256 verification |
 | **Main Web Application** | [`https://scrutium.com`](https://scrutium.com) | Browser-based interactive AI web application |
 | **Documentation Portal** | [`https://documentation.scrutium.com`](https://documentation.scrutium.com) | User guides, API references, & release notes |
 
@@ -40,7 +40,7 @@ Release parameters are centralized in [`lib/download-config.ts`](lib/download-co
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with a restrained monochrome palette
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Technical SEO**:
-  - Canonical URL (`https://download.scrutium.com`)
+  - Canonical URL (`https://downloads.scrutium.com`)
   - OpenGraph & Twitter Cards
   - Dynamic XML Sitemap (`/app/sitemap.ts` $\rightarrow$ `/sitemap.xml`)
   - Dynamic Robots Configuration (`/app/robots.ts` $\rightarrow$ `/robots.txt`)
@@ -108,7 +108,7 @@ npm run build
 
 ## 6. Cloudflare Production Deployment & DNS Setup
 
-To deploy this project to production and bind `download.scrutium.com` on Cloudflare:
+To deploy this project to production and bind `downloads.scrutium.com` on Cloudflare:
 
 ### Method A: Cloudflare Pages Deployment (Recommended)
 
@@ -120,11 +120,11 @@ To deploy this project to production and bind `download.scrutium.com` on Cloudfl
    - **Build output directory**: `.next` (or standalone)
 4. Add the **Environment Variable**:
    ```env
-   APP_URL = https://download.scrutium.com
+   APP_URL = https://downloads.scrutium.com
    NODE_VERSION = 20
    ```
 5. Click **Save and Deploy**.
-6. Once deployed, navigate to **Custom domains** $\rightarrow$ **Set up a custom domain** $\rightarrow$ enter `download.scrutium.com`. Cloudflare will automatically route DNS and generate SSL/TLS certificates.
+6. Once deployed, navigate to **Custom domains** $\rightarrow$ **Set up a custom domain** $\rightarrow$ enter `downloads.scrutium.com`. Cloudflare will automatically route DNS and generate SSL/TLS certificates.
 
 ---
 
@@ -135,7 +135,7 @@ If you are running the Next.js standalone container on a cloud host (Google Clou
 1. **Add CNAME Record in Cloudflare DNS for `scrutium.com`**:
    | Type | Name | Target / Content | Proxy status | TTL |
    | :--- | :--- | :--- | :--- | :--- |
-   | **CNAME** | `download` | `[your-cloud-run-domain-or-cname]` | Proxied (Orange Cloud) | Auto |
+   | **CNAME** | `downloads` | `[your-cloud-run-domain-or-cname]` | Proxied (Orange Cloud) | Auto |
 
 2. **Configure SSL/TLS in Cloudflare**:
    - Go to **SSL/TLS** $\rightarrow$ **Overview** $\rightarrow$ set to **Full (strict)**.
@@ -150,8 +150,8 @@ If you are running the Next.js standalone container on a cloud host (Google Clou
 ### Step 5: Google Search Console Submission
 
 Once DNS resolves:
-1. Add the domain property `https://download.scrutium.com` in Google Search Console.
-2. Submit the dynamic sitemap URL: `https://download.scrutium.com/sitemap.xml`.
+1. Add the domain property `https://downloads.scrutium.com` in Google Search Console.
+2. Submit the dynamic sitemap URL: `https://downloads.scrutium.com/sitemap.xml`.
 
 ---
 

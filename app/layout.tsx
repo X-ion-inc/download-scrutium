@@ -3,7 +3,7 @@ import './globals.css';
 import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://download.scrutium.com'),
+  metadataBase: new URL('https://downloads.scrutium.com'),
   title: 'Scrutium — Official App Downloads',
   description:
     'Download the official Scrutium mobile app. Bring Scrutium AI to your device, explore its capabilities, and continue on the web.',
@@ -15,13 +15,13 @@ export const metadata: Metadata = {
     'Scrutium APK',
   ],
   alternates: {
-    canonical: 'https://download.scrutium.com',
+    canonical: 'https://downloads.scrutium.com',
   },
   openGraph: {
     title: 'Scrutium — Official App Downloads',
     description:
       'Bring Scrutium AI to your device. Get the app, explore its capabilities, and continue on the web whenever you need to.',
-    url: 'https://download.scrutium.com',
+    url: 'https://downloads.scrutium.com',
     siteName: 'Scrutium',
     locale: 'en_US',
     type: 'website',

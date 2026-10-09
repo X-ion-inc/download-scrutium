@@ -29,7 +29,7 @@ Application: Scrutium AI
 Platform: ${platformConfig.name} (${platformConfig.subtitle})
 Version: ${platformConfig.version}
 Package: ${fileName}
-Official Source: https://download.scrutium.com
+Official Source: https://downloads.scrutium.com
 Documentation: https://documentation.scrutium.com
 Web Application: https://scrutium.com
 =====================================================
