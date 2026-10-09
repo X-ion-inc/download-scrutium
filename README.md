@@ -1,36 +1,35 @@
-# Scrutium AI — Official App Download Portal
+# Scrutium — Official App Download Portal
 
 The dedicated, production-ready application download website for **Scrutium AI** (`https://download.scrutium.com`).
 
-This portal allows visitors to explore Scrutium AI's capabilities, choose their supported platform, and download verified standalone client applications.
+Built with design restraint inspired by industry-leading product software distributions: clean typographic hierarchy, generous whitespace, straightforward platform downloads, authentic product capabilities, and immediate web access.
 
 ---
 
-## 1. Official Architecture & Domain Mapping
+## 1. Architecture & Domain Mapping
 
-This website operates independently from the main Scrutium web application and documentation portal:
+This download portal operates independently from the main Scrutium web application and documentation portal:
 
 | Property | URL | Role |
 | :--- | :--- | :--- |
-| **Download Portal** (This Project) | [`https://download.scrutium.com`](https://download.scrutium.com) | Official standalone client downloads & verification |
-| **Main Web Application** | [`https://scrutium.com`](https://scrutium.com) | Browser-based interactive AI web app |
-| **Documentation Portal** | [`https://documentation.scrutium.com`](https://documentation.scrutium.com) | Technical user guides, API docs, & release notes |
+| **Download Portal** (This Project) | [`https://download.scrutium.com`](https://download.scrutium.com) | Standalone client downloads & SHA-256 verification |
+| **Main Web Application** | [`https://scrutium.com`](https://scrutium.com) | Browser-based interactive AI web application |
+| **Documentation Portal** | [`https://documentation.scrutium.com`](https://documentation.scrutium.com) | User guides, API references, & release notes |
 
-All "Try on Web" actions throughout this site link directly to `https://scrutium.com`. All "Documentation" links route to `https://documentation.scrutium.com`.
+Every "Try on Web" link navigates directly to `https://scrutium.com`. All "Documentation" links route to `https://documentation.scrutium.com`.
 
 ---
 
 ## 2. Supported Platforms & Release Manifest
 
-| Platform | Format | Version | Size | Checksum (SHA-256) | Status |
+| Platform | Format | Version | Size | Checksum (SHA-256) | Download Link |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Android** | Universal APK | `v1.2.0` | 42.8 MB | `9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08` | **Available** |
-| **Windows** | 64-bit `.exe` Setup | `v1.2.0` | 78.4 MB | `5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8` | **Available** |
-| **macOS** | Universal DMG | — | — | — | *In Notarization* |
-| **iOS / iPadOS** | App Store / TestFlight | — | — | — | *In Review* |
-| **Linux** | AppImage / `.deb` | — | — | — | *In Preparation* |
+| **Android** | Universal APK | `v1.2.0` | 42.8 MB | `9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08` | [Direct APK Download](https://github.com/X-ions/download-scrutium/releases/download/scrutium-mobile/scrutium.apk) |
+| **Windows** | 64-bit `.exe` Setup | `v1.2.0` | 78.4 MB | `5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8` | [Direct Installer](/api/download/windows) |
 
-Releases are centrally defined and managed in [`lib/download-config.ts`](lib/download-config.ts).
+*Note for macOS, Linux, and iOS users: The complete Scrutium AI workspace runs in any modern web browser at [https://scrutium.com](https://scrutium.com).*
+
+Release parameters are centralized in [`lib/download-config.ts`](lib/download-config.ts).
 
 ---
 
@@ -38,11 +37,10 @@ Releases are centrally defined and managed in [`lib/download-config.ts`](lib/dow
 
 - **Framework**: [Next.js 15+](https://nextjs.org/) (App Router, Standalone build output)
 - **Runtime**: React 19 & TypeScript (strict mode)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with dark mode obsidian palette
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) with a restrained monochrome palette
 - **Icons**: [Lucide React](https://lucide.dev/)
-- **Animations**: `motion` (`motion/react`)
 - **Technical SEO**:
-  - Strict Canonical URL (`https://download.scrutium.com`)
+  - Canonical URL (`https://download.scrutium.com`)
   - OpenGraph & Twitter Cards
   - Dynamic XML Sitemap (`/app/sitemap.ts` $\rightarrow$ `/sitemap.xml`)
   - Dynamic Robots Configuration (`/app/robots.ts` $\rightarrow$ `/robots.txt`)
@@ -58,23 +56,21 @@ Releases are centrally defined and managed in [`lib/download-config.ts`](lib/dow
 │   │   └── download/
 │   │       └── [platform]/
 │   │           └── route.ts        # Download dispatcher with streaming headers
-│   ├── globals.css                 # Tailwind v4 theme & base styles
-│   ├── layout.tsx                  # Root layout, metadata & JSON-LD injection
-│   ├── page.tsx                    # Main portal view
+│   ├── globals.css                 # Tailwind v4 theme & base typography
+│   ├── layout.tsx                  # Root layout, metadata & JSON-LD
+│   ├── page.tsx                    # Main download portal view
 │   ├── robots.ts                   # Search crawler directives
 │   └── sitemap.ts                  # XML sitemap generator
 ├── components/
-│   ├── DeploymentGuideModal.tsx    # In-app DNS and deployment walkthrough
-│   ├── FaqSection.tsx              # Interactive FAQ accordion
-│   ├── FeaturesSection.tsx         # Product capability bento grid
-│   ├── FinalCta.tsx                # Bottom conversion call-to-action
-│   ├── Footer.tsx                  # Brand footer & navigation mirror
-│   ├── Hero.tsx                    # Value prop & illustrative app preview
+│   ├── DeploymentGuideModal.tsx    # DNS and deployment walkthrough modal
+│   ├── FaqSection.tsx              # Minimal FAQ accordion
+│   ├── FeaturesSection.tsx         # 4 authentic product capabilities
+│   ├── Footer.tsx                  # Restrained footer & navigation mirror
+│   ├── Hero.tsx                    # Confident headline, CTA & ecosystem summary
 │   ├── InstallationGuide.tsx       # Platform-specific step-by-step guides
-│   ├── JsonLd.tsx                  # Schema.org structured data scripts
-│   ├── Navbar.tsx                  # 3-Zone navigation header & mobile drawer
-│   ├── PlatformsSection.tsx        # Available & coming soon platform cards
-│   └── WhyScrutium.tsx             # Practical native app benefits
+│   ├── JsonLd.tsx                  # Schema.org structured data script
+│   ├── Navbar.tsx                  # Compact navigation header & mobile drawer
+│   └── PlatformsSection.tsx        # Available platform download cards & checksums
 ├── hooks/
 │   └── use-mobile.ts               # SSR-safe viewport listener
 ├── lib/
@@ -90,16 +86,9 @@ Releases are centrally defined and managed in [`lib/download-config.ts`](lib/dow
 
 ## 5. Development & Build
 
-### Prerequisites
-- Node.js 20+
-- npm or pnpm
-
 ### Local Development
 ```bash
-# Install dependencies
 npm install
-
-# Start local development server on port 3000
 npm run dev
 ```
 
@@ -122,34 +111,31 @@ npm run build
 To connect `download.scrutium.com` to your deployed hosting service:
 
 ### Step 1: Deploy the Build
-Deploy the standalone Next.js container to your hosting infrastructure (Google Cloud Run, Vercel, AWS ECS, or VPS).
+Deploy the standalone Next.js container to your hosting infrastructure (Cloud Run, Vercel, AWS ECS, or VPS).
 
-Ensure the environment variable is configured:
+Configure the environment variable:
 ```env
 APP_URL=https://download.scrutium.com
 ```
 
 ### Step 2: Configure Registrar DNS Records
-In your DNS management dashboard for `scrutium.com` (Cloudflare, Google Cloud DNS, Route 53, etc.), create a DNS record for the `download` subdomain:
+In your DNS management dashboard for `scrutium.com`, add a CNAME record:
 
 | Record Type | Host / Name | Target / Destination | TTL |
 | :--- | :--- | :--- | :--- |
 | **CNAME** | `download` | `cname.your-host.com` *(or Cloud Run domain mapping)* | Auto / 300 |
-| **A** *(Alternative)* | `download` | `[Static Ingress IP]` | Auto / 300 |
 
 ### Step 3: SSL / HTTPS
-Enable managed TLS/SSL certificate provisioning (e.g. Let's Encrypt or Cloudflare Universal SSL). All HTTP traffic should automatically redirect to `https://download.scrutium.com`.
+Enable managed TLS/SSL certificate provisioning. All HTTP traffic should automatically redirect to `https://download.scrutium.com`.
 
 ### Step 4: Submit Sitemap to Google Search Console
 Once DNS resolves:
 1. Add the domain property `https://download.scrutium.com` in Google Search Console.
-2. Submit the generated XML sitemap URL: `https://download.scrutium.com/sitemap.xml`.
+2. Submit the XML sitemap URL: `https://download.scrutium.com/sitemap.xml`.
 
 ---
 
 ## 7. Cryptographic Binary Verification
-
-Users can verify that their downloaded file is authentic and untampered:
 
 ### Windows (PowerShell / Command Prompt):
 ```powershell
@@ -158,14 +144,11 @@ certutil -hashfile scrutium-ai-setup-v1.2.0.exe SHA256
 
 ### Android / Linux / macOS (Terminal):
 ```bash
-sha256sum scrutium-ai-v1.2.0.apk
+sha256sum scrutium.apk
 ```
-
-Compare the printed output against the hash listed in [`lib/download-config.ts`](lib/download-config.ts) and on the live website.
 
 ---
 
 ## 8. License & Copyright
 
-Copyright © 2026 Scrutium Inc. All rights reserved.
-All brand marks, logos, and product designs are proprietary to Scrutium Inc.
+Copyright © 2026 X-ion, Inc. All rights reserved.

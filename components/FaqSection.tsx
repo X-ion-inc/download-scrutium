@@ -12,68 +12,62 @@ export default function FaqSection() {
   };
 
   return (
-    <section id="faq" className="py-20 border-t border-white/[0.08] relative">
+    <section id="faq" className="py-20 border-t border-neutral-800/80 bg-[#0a0b0e]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-4 mb-14">
-          <div className="text-xs font-semibold uppercase tracking-wider text-blue-400">
+        <div className="space-y-3 mb-10">
+          <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-white">
             Frequently Asked Questions
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            Everything you need to know.
           </h2>
-          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-            Direct answers regarding installation, platform support, and official links.
+          <p className="text-sm text-neutral-400 leading-relaxed">
+            Direct details regarding installation, platform availability, and web access.
           </p>
         </div>
 
-        <div className="space-y-3">
+        <div className="divide-y divide-neutral-800/80 border-t border-b border-neutral-800/80">
           {FAQS.map((faq, index) => {
             const isOpen = openIndex === index;
             return (
-              <div
-                key={index}
-                className="rounded-xl border border-white/[0.08] bg-[#0c101a] overflow-hidden transition-all"
-              >
+              <div key={index} className="py-4">
                 <button
                   onClick={() => toggleIndex(index)}
-                  className="w-full flex items-center justify-between p-5 text-left text-sm sm:text-base font-semibold text-white hover:text-blue-400 transition-colors cursor-pointer"
+                  className="w-full flex items-center justify-between text-left text-sm font-medium text-white hover:text-neutral-200 transition-colors cursor-pointer py-1"
                   aria-expanded={isOpen}
                 >
                   <span className="pr-4">{faq.question}</span>
                   <ChevronDown
-                    className={`w-4 h-4 text-neutral-400 transition-transform duration-200 shrink-0 ${
-                      isOpen ? 'rotate-180 text-blue-400' : ''
+                    className={`w-4 h-4 text-neutral-500 transition-transform duration-200 shrink-0 ${
+                      isOpen ? 'rotate-180 text-white' : ''
                     }`}
                   />
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-5 text-xs sm:text-sm text-neutral-300 leading-relaxed border-t border-white/[0.04] pt-3">
+                  <div className="pt-2.5 pb-2 text-xs sm:text-sm text-neutral-400 leading-relaxed space-y-2">
                     <p>{faq.answer}</p>
                     {faq.question.includes('documentation') && (
-                      <div className="mt-2.5">
+                      <div>
                         <a
                           href={SITE_CONFIG.docsUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 font-medium underline"
+                          className="inline-flex items-center gap-1 text-white hover:underline font-medium text-xs"
                         >
-                          <span>Visit Documentation Portal</span>
-                          <ArrowUpRight className="w-3.5 h-3.5" />
+                          <span>Open Documentation Portal</span>
+                          <ArrowUpRight className="w-3 h-3" />
                         </a>
                       </div>
                     )}
                     {(faq.question.includes('without installing') ||
                       faq.question.includes('What is Scrutium AI?')) && (
-                      <div className="mt-2.5">
+                      <div>
                         <a
                           href={SITE_CONFIG.webAppUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-blue-400 hover:text-blue-300 font-medium underline"
+                          className="inline-flex items-center gap-1 text-white hover:underline font-medium text-xs"
                         >
-                          <span>Open Scrutium on the Web (scrutium.com)</span>
-                          <ArrowUpRight className="w-3.5 h-3.5" />
+                          <span>Launch Scrutium on Web (scrutium.com)</span>
+                          <ArrowUpRight className="w-3 h-3" />
                         </a>
                       </div>
                     )}
@@ -82,19 +76,6 @@ export default function FaqSection() {
               </div>
             );
           })}
-        </div>
-
-        <div className="mt-10 text-center text-xs text-neutral-400">
-          Have an unanswered technical question? Explore our comprehensive guides at{' '}
-          <a
-            href={SITE_CONFIG.docsUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-blue-400 hover:underline"
-          >
-            documentation.scrutium.com
-          </a>
-          .
         </div>
       </div>
     </section>

@@ -4,35 +4,33 @@ import JsonLd from '@/components/JsonLd';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://download.scrutium.com'),
-  title: 'Scrutium AI App Download | Official Desktop & Mobile Releases',
+  title: 'Scrutium — Official App Downloads',
   description:
-    'Download official Scrutium AI apps for Android and Windows. Experience fast, intelligent AI assistance for writing, coding, and problem-solving on your device.',
+    'Download the official Scrutium app for Android and Windows. Bring Scrutium AI to your device, explore its capabilities, and continue on the web.',
   keywords: [
     'Scrutium AI download',
-    'Download Scrutium AI app',
+    'Download Scrutium app',
     'Scrutium Android app',
     'Scrutium for Windows',
-    'Scrutium app installation',
-    'Scrutium AI features',
     'Scrutium APK',
   ],
   alternates: {
     canonical: 'https://download.scrutium.com',
   },
   openGraph: {
-    title: 'Scrutium AI App Download | Official Desktop & Mobile Releases',
+    title: 'Scrutium — Official App Downloads',
     description:
-      'Meet Scrutium, your AI assistant for exploring ideas, solving problems, writing, learning, coding, and getting more done. Download the official app.',
+      'Bring Scrutium AI to your device. Get the app, explore its capabilities, and continue on the web whenever you need to.',
     url: 'https://download.scrutium.com',
-    siteName: 'Scrutium AI',
+    siteName: 'Scrutium',
     locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Scrutium AI App Download | Official Desktop & Mobile Releases',
+    title: 'Scrutium — Official App Downloads',
     description:
-      'Official Scrutium AI apps for Android and Windows. Take your AI experience wherever you go.',
+      'Official Scrutium AI standalone applications for Android and Windows.',
   },
   robots: {
     index: true,
@@ -48,7 +46,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#090a10',
+  themeColor: '#07080b',
   width: 'device-width',
   initialScale: 1,
 };
@@ -63,7 +61,7 @@ export default function RootLayout({
       <head>
         <JsonLd />
       </head>
-      <body className="min-h-screen bg-[#07090e] text-neutral-100 antialiased selection:bg-blue-600/30 selection:text-blue-200">
+      <body className="min-h-screen bg-[#07080b] text-neutral-100 antialiased selection:bg-neutral-800 selection:text-white">
         {children}
       </body>
     </html>

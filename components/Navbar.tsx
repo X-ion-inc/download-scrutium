@@ -12,7 +12,7 @@ interface NavbarProps {
 export default function Navbar({ onOpenDeployGuide }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  const scrollToSection = (id: string) => {
+  const scrollTo = (id: string) => {
     setMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
@@ -21,88 +21,78 @@ export default function Navbar({ onOpenDeployGuide }: NavbarProps) {
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-[#07090e]/85 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto flex items-center justify-between gap-8 px-4 sm:px-6 lg:px-8 h-16">
-        {/* Zone 1: Brand Wordmark */}
-        <div className="flex items-center gap-2 shrink-0">
+    <header className="sticky top-0 z-40 w-full border-b border-neutral-800/80 bg-[#0a0b0e]/90 backdrop-blur-md">
+      <div className="max-w-6xl mx-auto flex items-center justify-between gap-6 px-4 sm:px-6 lg:px-8 h-15">
+        {/* Brand Lockup */}
+        <div className="flex items-center gap-3 shrink-0">
           <Link
             href="/"
-            className="flex items-center gap-2.5 text-lg font-semibold tracking-tight text-white hover:text-blue-400 transition-colors whitespace-nowrap"
+            className="flex items-center gap-2.5 text-sm font-semibold tracking-tight text-white hover:text-neutral-200 transition-colors"
           >
-            <span className="w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 font-bold text-base shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+            <span className="w-7 h-7 rounded-md bg-neutral-900 border border-neutral-700/80 flex items-center justify-center text-white font-bold text-xs">
               S
             </span>
-            <span>Scrutium AI</span>
+            <span className="text-[15px] font-medium tracking-tight">Scrutium</span>
           </Link>
         </div>
 
-        {/* Zone 2: 4-5 Single-line Navigation Links */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-neutral-400">
+        {/* Central Nav Links */}
+        <nav className="hidden md:flex items-center gap-7 text-xs font-medium text-neutral-400">
           <button
-            onClick={() => scrollToSection('features')}
-            className="hover:text-white transition-colors whitespace-nowrap cursor-pointer"
+            onClick={() => scrollTo('downloads')}
+            className="hover:text-white transition-colors cursor-pointer"
+          >
+            Downloads
+          </button>
+          <button
+            onClick={() => scrollTo('capabilities')}
+            className="hover:text-white transition-colors cursor-pointer"
           >
             Features
-          </button>
-          <button
-            onClick={() => scrollToSection('platforms')}
-            className="hover:text-white transition-colors whitespace-nowrap cursor-pointer"
-          >
-            Platforms
-          </button>
-          <button
-            onClick={() => scrollToSection('installation')}
-            className="hover:text-white transition-colors whitespace-nowrap cursor-pointer"
-          >
-            Installation
-          </button>
-          <button
-            onClick={() => scrollToSection('faq')}
-            className="hover:text-white transition-colors whitespace-nowrap cursor-pointer"
-          >
-            FAQ
           </button>
           <a
             href={SITE_CONFIG.docsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 hover:text-white transition-colors whitespace-nowrap"
+            className="inline-flex items-center gap-1 hover:text-white transition-colors"
           >
             <span>Documentation</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-neutral-500" />
+            <ArrowUpRight className="w-3 h-3 text-neutral-500" />
           </a>
         </nav>
 
-        {/* Zone 3: Actions (Try on Web + Download App primary) */}
-        <div className="hidden sm:flex items-center gap-4 shrink-0">
+        {/* Action Controls */}
+        <div className="hidden sm:flex items-center gap-3 shrink-0">
           <a
             href={SITE_CONFIG.webAppUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-medium text-neutral-300 hover:text-white transition-colors whitespace-nowrap px-3 py-2"
+            className="text-xs font-medium text-neutral-300 hover:text-white transition-colors px-3 py-1.5"
           >
             Try on Web
           </a>
-          <button
-            onClick={() => scrollToSection('platforms')}
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-medium text-white bg-blue-600 hover:bg-blue-500 rounded-lg shadow-sm hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] transition-all whitespace-nowrap cursor-pointer"
+          <a
+            href={SITE_CONFIG.officialApkDownloadUrl}
+            download="scrutium.apk"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-medium text-black bg-white hover:bg-neutral-200 rounded-md transition-colors cursor-pointer"
           >
             <Download className="w-3.5 h-3.5" />
-            <span>Download App</span>
-          </button>
+            <span>Download</span>
+          </a>
         </div>
 
-        {/* Mobile menu toggle */}
+        {/* Mobile menu trigger */}
         <div className="flex sm:hidden items-center gap-2">
-          <button
-            onClick={() => scrollToSection('platforms')}
-            className="px-3 py-1.5 text-xs font-medium text-white bg-blue-600 rounded-lg"
+          <a
+            href={SITE_CONFIG.officialApkDownloadUrl}
+            download="scrutium.apk"
+            className="px-3 py-1.5 text-xs font-medium text-black bg-white rounded-md"
           >
             Download
-          </button>
+          </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 text-neutral-400 hover:text-white rounded-lg hover:bg-white/5"
+            className="p-1.5 text-neutral-400 hover:text-white rounded-md hover:bg-neutral-800/60"
             aria-label="Toggle navigation menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -112,51 +102,39 @@ export default function Navbar({ onOpenDeployGuide }: NavbarProps) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="sm:hidden border-b border-white/[0.08] bg-[#0a0d16] px-4 pt-3 pb-6 space-y-3">
-          <div className="flex flex-col space-y-2 text-sm font-medium text-neutral-300">
+        <div className="sm:hidden border-b border-neutral-800 bg-[#0d0e13] px-5 py-4 space-y-3 text-xs">
+          <div className="flex flex-col space-y-2 text-neutral-300">
             <button
-              onClick={() => scrollToSection('features')}
-              className="text-left py-2 hover:text-white transition-colors"
+              onClick={() => scrollTo('downloads')}
+              className="text-left py-1.5 hover:text-white transition-colors"
+            >
+              Downloads
+            </button>
+            <button
+              onClick={() => scrollTo('capabilities')}
+              className="text-left py-1.5 hover:text-white transition-colors"
             >
               Features
-            </button>
-            <button
-              onClick={() => scrollToSection('platforms')}
-              className="text-left py-2 hover:text-white transition-colors"
-            >
-              Supported Platforms
-            </button>
-            <button
-              onClick={() => scrollToSection('installation')}
-              className="text-left py-2 hover:text-white transition-colors"
-            >
-              Installation Steps
-            </button>
-            <button
-              onClick={() => scrollToSection('faq')}
-              className="text-left py-2 hover:text-white transition-colors"
-            >
-              FAQ
             </button>
             <a
               href={SITE_CONFIG.docsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between py-2 text-blue-400 hover:underline"
+              className="flex items-center justify-between py-1.5 text-neutral-300 hover:text-white"
             >
               <span>Documentation</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-neutral-500" />
             </a>
           </div>
 
-          <div className="pt-3 border-t border-white/[0.08] flex flex-col gap-2">
+          <div className="pt-3 border-t border-neutral-800/80 flex flex-col gap-2">
             <a
               href={SITE_CONFIG.webAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full text-center py-2.5 text-xs font-medium text-neutral-200 border border-white/10 rounded-lg hover:bg-white/5 transition-colors"
+              className="w-full text-center py-2 text-xs font-medium text-neutral-200 border border-neutral-700/60 rounded-md hover:bg-white/[0.04] transition-colors"
             >
-              Open Web Application (scrutium.com)
+              Try on Web (scrutium.com)
             </a>
             {onOpenDeployGuide && (
               <button
@@ -164,9 +142,9 @@ export default function Navbar({ onOpenDeployGuide }: NavbarProps) {
                   setMobileMenuOpen(false);
                   onOpenDeployGuide();
                 }}
-                className="w-full text-center py-2 text-xs text-neutral-400 hover:text-white transition-colors"
+                className="w-full text-center py-1.5 text-[11px] text-neutral-500 hover:text-neutral-300 transition-colors"
               >
-                DNS & Deployment Guide
+                DNS & Deployment Instructions
               </button>
             )}
           </div>

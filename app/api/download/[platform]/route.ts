@@ -14,6 +14,11 @@ export async function GET(
     });
   }
 
+  // Redirect directly to official external binary release
+  if (platformConfig.downloadUrl.startsWith('http')) {
+    return NextResponse.redirect(platformConfig.downloadUrl, 302);
+  }
+
   const fileName = platformConfig.fileName || `scrutium-${platformConfig.id}-v${platformConfig.version}.bin`;
   
   // Package stub payload indicating verified Scrutium release metadata
@@ -35,7 +40,7 @@ To verify binary integrity, run:
   Windows: certutil -hashfile ${fileName} SHA256
   Linux/macOS: sha256sum ${fileName}
 
-Official Scrutium AI distribution. Copyright Scrutium Inc. All rights reserved.
+Official Scrutium AI distribution. Copyright X-ion, Inc. All rights reserved.
 `;
 
   return new NextResponse(packagePayload, {

@@ -10,7 +10,7 @@ export default function JsonLd() {
       {
         '@type': 'Organization',
         '@id': `${SITE_CONFIG.domain}/#organization`,
-        name: 'Scrutium AI',
+        name: 'X-ion, Inc.',
         url: SITE_CONFIG.webAppUrl,
         logo: `${SITE_CONFIG.domain}/icon.svg`,
         sameAs: [
@@ -36,7 +36,10 @@ export default function JsonLd() {
         softwareVersion: androidPlatform?.version || '1.2.0',
         fileSize: androidPlatform?.fileSize || '42.8 MB',
         datePublished: '2026-10-01',
-        downloadUrl: `${SITE_CONFIG.domain}${androidPlatform?.downloadUrl}`,
+        downloadUrl:
+          androidPlatform?.downloadUrl.startsWith('http')
+            ? androidPlatform.downloadUrl
+            : `${SITE_CONFIG.domain}${androidPlatform?.downloadUrl}`,
         offers: {
           '@type': 'Offer',
           price: '0',

@@ -1,73 +1,51 @@
-import {
-  MessageSquare,
-  PenTool,
-  Code2,
-  Brain,
-  FileSearch,
-  RefreshCw,
-} from 'lucide-react';
-import { FEATURES } from '@/lib/download-config';
+import { CAPABILITIES, SITE_CONFIG } from '@/lib/download-config';
+import { ArrowUpRight } from 'lucide-react';
 
 export default function FeaturesSection() {
-  const getFeatureIcon = (id: string) => {
-    switch (id) {
-      case 'conversations':
-        return <MessageSquare className="w-5 h-5 text-blue-400" />;
-      case 'writing':
-        return <PenTool className="w-5 h-5 text-indigo-400" />;
-      case 'coding':
-        return <Code2 className="w-5 h-5 text-sky-400" />;
-      case 'research':
-        return <Brain className="w-5 h-5 text-purple-400" />;
-      case 'analysis':
-        return <FileSearch className="w-5 h-5 text-emerald-400" />;
-      case 'sync':
-        return <RefreshCw className="w-5 h-5 text-amber-400" />;
-      default:
-        return <MessageSquare className="w-5 h-5 text-blue-400" />;
-    }
-  };
-
   return (
-    <section id="features" className="py-20 border-t border-white/[0.08] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
-          <div className="text-xs font-semibold uppercase tracking-wider text-blue-400">
-            Core Capabilities
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
-            Built for thinkers, builders, and problem solvers.
+    <section id="capabilities" className="py-20 border-t border-neutral-800/80 bg-[#0a0b0e]">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-2xl space-y-3 mb-12">
+          <h2 className="text-2xl sm:text-3xl font-medium tracking-tight text-white">
+            Product Capabilities
           </h2>
-          <p className="text-neutral-300 text-sm sm:text-base leading-relaxed">
-            Scrutium AI brings deep reasoning, context preservation, and distraction-free tooling into every platform build.
+          <p className="text-sm text-neutral-400 leading-relaxed">
+            Scrutium AI provides focused, responsive intelligence for research, drafting, and technical clarification.
           </p>
         </div>
 
-        {/* Feature Cards Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {FEATURES.map((feature) => (
+        {/* 4 Restrained Capabilities Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {CAPABILITIES.map((cap, index) => (
             <div
-              key={feature.id}
-              className="rounded-2xl border border-white/[0.08] bg-[#0c101a] p-7 flex flex-col justify-between hover:border-white/[0.18] transition-all group"
+              key={cap.id}
+              className="border border-neutral-800/80 bg-[#0d0e13]/80 rounded-xl p-6 space-y-3"
             >
-              <div className="space-y-4">
-                <div className="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center group-hover:scale-105 transition-transform">
-                  {getFeatureIcon(feature.id)}
-                </div>
-                <h3 className="text-lg font-semibold text-white tracking-tight">
-                  {feature.title}
-                </h3>
-                <p className="text-neutral-300 text-sm leading-relaxed">
-                  {feature.description}
-                </p>
+              <div className="text-xs font-mono text-neutral-400">
+                {`0${index + 1}`}
               </div>
-
-              {/* Clean unboxed metadata footer */}
-              <div className="pt-6 mt-6 border-t border-white/[0.06] text-xs font-mono text-neutral-400">
-                {feature.metric}
-              </div>
+              <h3 className="text-base font-medium text-white tracking-tight">
+                {cap.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed">
+                {cap.description}
+              </p>
             </div>
           ))}
+        </div>
+
+        <div className="mt-8 text-xs text-neutral-400">
+          For full documentation on keyboard navigation, settings, and release history, visit{' '}
+          <a
+            href={SITE_CONFIG.docsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-neutral-300 hover:text-white underline inline-flex items-center gap-0.5"
+          >
+            <span>documentation.scrutium.com</span>
+            <ArrowUpRight className="w-3 h-3" />
+          </a>
+          .
         </div>
       </div>
     </section>

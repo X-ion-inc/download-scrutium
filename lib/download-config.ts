@@ -7,22 +7,21 @@
  */
 
 export interface PlatformRelease {
-  id: 'android' | 'windows' | 'macos' | 'ios' | 'linux';
+  id: 'android' | 'windows';
   name: string;
   subtitle: string;
-  status: 'available' | 'coming-soon';
-  version?: string;
-  releaseDate?: string;
-  fileSize?: string;
-  format?: string;
-  downloadUrl?: string;
-  fileName?: string;
-  sha256?: string;
+  status: 'available';
+  version: string;
+  releaseDate: string;
+  fileSize: string;
+  format: string;
+  downloadUrl: string;
+  fileName: string;
+  sha256: string;
   minRequirements: string;
   recommendedRequirements?: string;
-  iconName: 'Smartphone' | 'Monitor' | 'Laptop' | 'Apple' | 'Terminal';
   shortNotes: string;
-  installSteps?: string[];
+  installSteps: string[];
   securityNotice?: string;
 }
 
@@ -32,12 +31,14 @@ export const SITE_CONFIG = {
   webAppUrl: 'https://scrutium.com',
   docsUrl: 'https://documentation.scrutium.com',
   supportEmail: 'support@scrutium.com',
-  companyName: 'Scrutium Inc.',
-  headline: 'Scrutium AI. Intelligence that moves with you.',
+  companyName: 'X-ion, Inc.',
+  headline: 'Scrutium, wherever you work.',
   subheadline:
-    'Meet Scrutium, your AI assistant for exploring ideas, solving problems, writing, learning, coding, and getting more done. Download the app and take your AI experience wherever you go.',
+    'Bring Scrutium AI to your device. Get the app, explore its capabilities, and continue on the web whenever you need to.',
+  officialApkDownloadUrl:
+    'https://github.com/X-ions/download-scrutium/releases/download/scrutium-mobile/scrutium.apk',
   currentReleaseVersion: 'v1.2.0',
-  releaseMonth: 'October 2026',
+  releaseDate: 'October 2026',
 };
 
 export const PLATFORMS: PlatformRelease[] = [
@@ -50,21 +51,21 @@ export const PLATFORMS: PlatformRelease[] = [
     releaseDate: 'October 2026',
     fileSize: '42.8 MB',
     format: 'APK (Universal ARM64 / ARMv7)',
-    fileName: 'scrutium-ai-v1.2.0.apk',
-    downloadUrl: '/api/download/android',
+    fileName: 'scrutium.apk',
+    downloadUrl:
+      'https://github.com/X-ions/download-scrutium/releases/download/scrutium-mobile/scrutium.apk',
     sha256: '9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08',
     minRequirements: 'Android 9.0 (Pie) or higher',
-    recommendedRequirements: 'Android 12+, 4GB RAM or higher',
-    iconName: 'Smartphone',
-    shortNotes: 'Direct APK installation with built-in auto-update notification.',
+    recommendedRequirements: 'Android 12 or higher, 4 GB RAM',
+    shortNotes: 'Direct APK download. Compatible with modern Android smartphones and tablets.',
     installSteps: [
-      'Download the official APK installer using the button below.',
-      'Open your Downloads folder and tap "scrutium-ai-v1.2.0.apk".',
-      'If prompted, allow "Install unknown apps" in Android Settings for your browser or file manager.',
-      'Tap Install and launch Scrutium AI once completed.',
+      'Download the official APK installer package.',
+      'Open your Downloads folder and select "scrutium.apk".',
+      'If prompted, toggle "Allow from this source" in Android Settings.',
+      'Tap Install and launch Scrutium AI to sign in or connect your account.',
     ],
     securityNotice:
-      'Security guidance: Sideloading APKs requires enabling unknown sources for your browser. Always verify the SHA-256 checksum against this official page to ensure package integrity.',
+      'Security notice: Android prompts for confirmation when installing packages outside the app store. Always verify the SHA-256 checksum to ensure cryptographic package integrity.',
   },
   {
     id: 'windows',
@@ -74,115 +75,46 @@ export const PLATFORMS: PlatformRelease[] = [
     version: '1.2.0',
     releaseDate: 'October 2026',
     fileSize: '78.4 MB',
-    format: 'Installer (.exe 64-bit)',
+    format: '64-bit Installer (.exe)',
     fileName: 'scrutium-ai-setup-v1.2.0.exe',
     downloadUrl: '/api/download/windows',
     sha256: '5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',
-    minRequirements: 'Windows 10 / 11 (64-bit)',
-    recommendedRequirements: 'Windows 11, Intel Core i5 / AMD Ryzen 5, 8GB RAM',
-    iconName: 'Monitor',
-    shortNotes: 'Native desktop experience with global quick-launch shortcut.',
+    minRequirements: 'Windows 10 or Windows 11 (64-bit)',
+    recommendedRequirements: 'Windows 11 (64-bit), 8 GB RAM',
+    shortNotes: 'Native desktop application with fast keyboard shortcuts and dedicated process isolation.',
     installSteps: [
       'Download the 64-bit Windows setup executable.',
       'Double-click "scrutium-ai-setup-v1.2.0.exe" from your downloads folder.',
       'Follow the setup wizard to complete installation.',
-      'Launch Scrutium AI from your Start Menu or Desktop shortcut.',
+      'Launch Scrutium AI from your Start Menu or Desktop.',
     ],
-  },
-  {
-    id: 'macos',
-    name: 'macOS',
-    subtitle: 'Apple Silicon & Intel',
-    status: 'coming-soon',
-    minRequirements: 'macOS 13.0 (Ventura) or later',
-    iconName: 'Apple',
-    shortNotes: 'Universal binary DMG package currently undergoing Apple notarization.',
-  },
-  {
-    id: 'ios',
-    name: 'iOS & iPadOS',
-    subtitle: 'iPhone & iPad',
-    status: 'coming-soon',
-    minRequirements: 'iOS 16.0 or later',
-    iconName: 'Smartphone',
-    shortNotes: 'App Store review in progress. Access all capabilities via mobile browser right now.',
-  },
-  {
-    id: 'linux',
-    name: 'Linux',
-    subtitle: 'Debian, Ubuntu & Fedora',
-    status: 'coming-soon',
-    minRequirements: 'glibc 2.31+ / 64-bit x86_64',
-    iconName: 'Terminal',
-    shortNotes: 'AppImage and .deb distribution packages planned for upcoming rollout.',
   },
 ];
 
-export const FEATURES = [
+export const CAPABILITIES = [
   {
-    id: 'conversations',
-    title: 'Adaptive AI Conversations',
+    id: 'reasoning',
+    title: 'Contextual Q&A & Reasoning',
     description:
-      'Engage in deep, multi-turn reasoning and contextual Q&A tailored to your line of work, studies, or curiosity.',
-    metric: 'Instant response latency',
+      'Explore complex inquiries, test hypotheses, and receive clear, reasoned responses with persistent conversation context.',
   },
   {
     id: 'writing',
-    title: 'Writing, Rewriting & Summaries',
+    title: 'Writing & Structured Synthesis',
     description:
-      'Draft reports, proofread essays, summarize long texts, and modulate tone from casual to academic with ease.',
-    metric: 'Tone & density controls',
+      'Draft reports, proofread prose, summarize lengthy reference documents, and structure thoughts without distraction.',
   },
   {
     id: 'coding',
-    title: 'Code & Debugging Partner',
+    title: 'Technical Problem Solving & Code',
     description:
-      'Inspect stack traces, write scripts, refactor algorithms, and receive line-by-line technical clarifications.',
-    metric: 'Multi-language syntax support',
+      'Analyze stack traces, explore algorithm designs, review scripts, and receive targeted implementation explanations.',
   },
   {
-    id: 'research',
-    title: 'Research & Structured Synthesis',
-    description:
-      'Break down complex subjects, compare options, and synthesize structured outlines ready for your workflow.',
-    metric: 'Clear, logical breakdowns',
-  },
-  {
-    id: 'analysis',
-    title: 'Document & Data Clarification',
-    description:
-      'Paste excerpts, schemas, and notes to quickly extract actionable insights, action items, and key takeaways.',
-    metric: 'Deep context retention',
-  },
-  {
-    id: 'sync',
+    id: 'continuity',
     title: 'Cross-Device Continuity',
     description:
-      'Seamlessly pick up discussions started in the mobile app on your desktop app or in the web browser at scrutium.com.',
-    metric: 'Universal account access',
-  },
-];
-
-export const WHY_SCRUTIUM = [
-  {
-    title: 'Dedicated Native Performance',
-    description:
-      'Run Scrutium in its own optimized window without browser tab clutter, memory overhead, or accidental closures.',
-  },
-  {
-    title: 'Fast Keyboard Workflow',
-    description:
-      'Open quickly with global system shortcuts, paste snippets instantly, and maintain your cognitive flow state.',
-  },
-  {
-    title: 'Consistent Web & App Parity',
-    description:
-      'Your prompt history and preferences stay synchronized whether you work on your phone, laptop, or through scrutium.com.',
-  },
-  {
-    title: 'Direct, Verified Binaries',
-    description:
-      'Official signed releases directly from Scrutium engineering, with transparent SHA-256 checksums you can verify.',
+      'Pick up your active sessions seamlessly across the native Android app, Windows desktop client, and scrutium.com.',
   },
 ];
 
@@ -190,46 +122,41 @@ export const FAQS = [
   {
     question: 'What is Scrutium AI?',
     answer:
-      'Scrutium AI is an intelligent assistant designed to help you explore ideas, solve analytical problems, write, code, and accomplish more every day. This portal provides verified, standalone applications for your desktop and mobile devices.',
+      'Scrutium AI is an intelligent assistant built to help you explore ideas, solve analytical problems, write, and work with code. This portal provides official standalone applications for supported devices.',
   },
   {
-    question: 'Which devices currently support the native Scrutium app?',
+    question: 'Which platforms are currently supported?',
     answer:
-      'Official standalone releases are currently available for Android devices (via verified universal APK) and Windows PCs (64-bit installer). Native packages for macOS, iOS, and Linux are in preparation. In the meantime, you can use Scrutium on any modern device via the web application.',
+      'Official standalone installers are available for Android (Universal APK) and Windows (64-bit installer). Users on macOS, iOS, or Linux can use Scrutium with full capability directly through any modern browser at https://scrutium.com.',
   },
   {
-    question: 'Can I use Scrutium without installing an app?',
+    question: 'Can I use Scrutium without installing the app?',
     answer:
-      'Yes. You can access the full Scrutium AI experience directly from any modern browser by visiting https://scrutium.com without downloading any software.',
+      'Yes. You can access the complete Scrutium AI experience in your browser at https://scrutium.com without downloading any software.',
   },
   {
-    question: 'How do I download and install Scrutium on Android?',
+    question: 'How do I install the Android version?',
     answer:
-      'Click the "Download APK" button under the Android platform card to download scrutium-ai-v1.2.0.apk. Open the downloaded file on your device. If prompted, enable "Install unknown apps" in Android Settings for your browser or file manager, then tap Install.',
+      'Download the official APK file from the download section. When opening the package, enable "Install unknown apps" in Android Settings if prompted, then complete installation.',
   },
   {
-    question: 'Is Scrutium available for Windows?',
+    question: 'Where can I find user guides and technical documentation?',
     answer:
-      'Yes. The 64-bit Windows setup executable is available for Windows 10 and Windows 11. Download the installer, run the setup wizard, and launch Scrutium directly from your Start Menu.',
+      'Comprehensive documentation, usage guides, and configuration references are hosted at https://documentation.scrutium.com.',
   },
   {
-    question: 'Where can I find official documentation and user guides?',
+    question: 'How do I verify the authenticity of a downloaded installer?',
     answer:
-      'Complete user guides, prompt best practices, and release notes are published at the official documentation portal: https://documentation.scrutium.com.',
+      'We publish the SHA-256 cryptographic hash alongside each release. Run "certutil -hashfile <file> SHA256" on Windows or "sha256sum <file>" in Linux/Android terminal to confirm the hash matches the one shown on this page.',
   },
   {
-    question: 'How do I update Scrutium when a new version is released?',
+    question: 'How do updates work for standalone apps?',
     answer:
-      'The Windows application checks for official updates upon launch. On Android, the app will notify you when a newer APK build is available, or you can return to https://download.scrutium.com to download the latest release.',
+      'The Windows client checks for updates at launch. Android will alert you when a newer release is published, or you can check https://download.scrutium.com anytime.',
   },
   {
-    question: 'How do I verify the security and authenticity of downloaded files?',
+    question: 'Where can I get technical support?',
     answer:
-      'We publish the cryptographic SHA-256 hash checksum alongside each official release. On Windows, run "certutil -hashfile <filename> SHA256" in PowerShell or Command Prompt. On Android/Linux, run "sha256sum <filename>" in terminal to confirm it matches the hash listed on this page.',
-  },
-  {
-    question: 'Where can I get technical support or report an issue?',
-    answer:
-      'For technical questions and feedback, consult https://documentation.scrutium.com or contact our engineering team via support@scrutium.com.',
+      'For technical issues, bug reports, or inquiries, visit https://documentation.scrutium.com or email support@scrutium.com.',
   },
 ];
