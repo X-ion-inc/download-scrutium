@@ -1,24 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import { Smartphone, Monitor, Terminal, Copy, Check, ArrowUpRight } from 'lucide-react';
+import { Smartphone, Monitor, ArrowUpRight } from 'lucide-react';
 import { PLATFORMS, SITE_CONFIG } from '@/lib/download-config';
 
 export default function InstallationGuide() {
-  const [activePlatform, setActivePlatform] = useState<'android' | 'windows'>('android');
-  const [copiedCmd, setCopiedCmd] = useState(false);
-
-  const selectedPlatform = PLATFORMS.find((p) => p.id === activePlatform) || PLATFORMS[0];
-  const verifyCmd =
-    activePlatform === 'windows'
-      ? `certutil -hashfile ${selectedPlatform.fileName} SHA256`
-      : `sha256sum ${selectedPlatform.fileName}`;
-
-  const handleCopyCmd = () => {
-    navigator.clipboard.writeText(verifyCmd);
-    setCopiedCmd(true);
-    setTimeout(() => setCopiedCmd(false), 2000);
-  };
+  const mobilePlatform = PLATFORMS.find((p) => p.id === 'mobile') || PLATFORMS[0];
 
   return (
     <section id="installation" className="py-20 border-t border-neutral-800/80 bg-[#090a0d]">
@@ -28,40 +14,22 @@ export default function InstallationGuide() {
             Installation Guide
           </h2>
           <p className="text-sm text-neutral-400 leading-relaxed">
-            Minimal steps to install and verify Scrutium AI on your device.
+            Steps to install Scrutium AI Mobile App (Version {mobilePlatform.version || '3.4.2'}).
           </p>
-        </div>
-
-        {/* Platform Selector Buttons */}
-        <div className="flex items-center gap-2 mb-6">
-          <button
-            onClick={() => setActivePlatform('android')}
-            className={`inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-medium rounded-md transition-colors cursor-pointer ${
-              activePlatform === 'android'
-                ? 'bg-white text-black'
-                : 'bg-neutral-900 text-neutral-400 hover:text-white border border-neutral-800'
-            }`}
-          >
-            <Smartphone className="w-3.5 h-3.5" />
-            <span>Android</span>
-          </button>
-          <button
-            onClick={() => setActivePlatform('windows')}
-            className={`inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-medium rounded-md transition-colors cursor-pointer ${
-              activePlatform === 'windows'
-                ? 'bg-white text-black'
-                : 'bg-neutral-900 text-neutral-400 hover:text-white border border-neutral-800'
-            }`}
-          >
-            <Monitor className="w-3.5 h-3.5" />
-            <span>Windows</span>
-          </button>
         </div>
 
         {/* Steps container */}
         <div className="border border-neutral-800 bg-[#0d0e13] rounded-xl p-6 sm:p-8 space-y-6">
+          <div className="flex items-center justify-between border-b border-neutral-800/80 pb-4">
+            <div className="flex items-center gap-2 text-white font-medium text-sm">
+              <Smartphone className="w-4 h-4 text-neutral-400" />
+              <span>Mobile App APK Installation</span>
+            </div>
+            <span className="text-xs font-mono text-neutral-400">scrutium.apk</span>
+          </div>
+
           <div className="space-y-4">
-            {selectedPlatform.installSteps.map((step, idx) => (
+            {mobilePlatform.installSteps?.map((step, idx) => (
               <div key={idx} className="flex items-start gap-4">
                 <span className="w-5 h-5 rounded bg-neutral-900 border border-neutral-800 text-neutral-400 flex items-center justify-center text-xs font-mono shrink-0">
                   {idx + 1}
@@ -72,49 +40,25 @@ export default function InstallationGuide() {
               </div>
             ))}
           </div>
-
-          {/* Cryptographic Verification Command */}
-          <div className="pt-4 border-t border-neutral-800/80 space-y-2">
-            <div className="flex items-center justify-between text-xs text-neutral-400">
-              <span className="flex items-center gap-1.5 font-mono text-[11px]">
-                <Terminal className="w-3.5 h-3.5 text-neutral-400" />
-                <span>Verify SHA-256 in terminal:</span>
-              </span>
-              <button
-                onClick={handleCopyCmd}
-                className="inline-flex items-center gap-1 text-[11px] text-neutral-400 hover:text-white transition-colors cursor-pointer"
-              >
-                {copiedCmd ? (
-                  <>
-                    <Check className="w-3 h-3 text-emerald-400" />
-                    <span className="text-emerald-400">Copied</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3 h-3" />
-                    <span>Copy</span>
-                  </>
-                )}
-              </button>
-            </div>
-            <div className="p-2.5 rounded bg-neutral-950 border border-neutral-800/80 font-mono text-xs text-neutral-300 overflow-x-auto select-all">
-              <code>{verifyCmd}</code>
-            </div>
-          </div>
         </div>
 
-        <div className="mt-8 text-xs text-neutral-400">
-          Encountering issues? Consult our complete troubleshooting guides at{' '}
+        {/* Desktop Note */}
+        <div className="mt-6 border border-neutral-800/70 bg-[#0d0e13]/50 rounded-lg p-4 flex items-center justify-between gap-4 text-xs text-neutral-400">
+          <div className="flex items-center gap-2.5">
+            <Monitor className="w-4 h-4 text-neutral-400 shrink-0" />
+            <span>
+              Desktop client setup guide for Windows & macOS will be published upon release. In the meantime, access all capabilities at <a href={SITE_CONFIG.webAppUrl} target="_blank" rel="noopener noreferrer" className="text-neutral-200 underline">scrutium.com</a>.
+            </span>
+          </div>
           <a
             href={SITE_CONFIG.docsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-neutral-300 hover:text-white underline inline-flex items-center gap-0.5"
+            className="text-neutral-300 hover:text-white underline inline-flex items-center gap-0.5 shrink-0"
           >
-            <span>documentation.scrutium.com</span>
+            <span>Docs</span>
             <ArrowUpRight className="w-3 h-3" />
           </a>
-          .
         </div>
       </div>
     </section>

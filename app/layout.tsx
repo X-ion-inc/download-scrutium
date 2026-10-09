@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://download.scrutium.com'),
   title: 'Scrutium — Official App Downloads',
   description:
-    'Download the official Scrutium app for Android and Windows. Bring Scrutium AI to your device, explore its capabilities, and continue on the web.',
+    'Download the official Scrutium mobile app. Bring Scrutium AI to your device, explore its capabilities, and continue on the web.',
   keywords: [
     'Scrutium AI download',
     'Download Scrutium app',
-    'Scrutium Android app',
-    'Scrutium for Windows',
+    'Scrutium mobile app',
+    'Scrutium desktop app',
     'Scrutium APK',
   ],
   alternates: {
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Scrutium — Official App Downloads',
     description:
-      'Official Scrutium AI standalone applications for Android and Windows.',
+      'Official Scrutium AI standalone mobile application.',
   },
   robots: {
     index: true,

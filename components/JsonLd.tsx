@@ -1,8 +1,7 @@
 import { SITE_CONFIG, PLATFORMS } from '@/lib/download-config';
 
 export default function JsonLd() {
-  const androidPlatform = PLATFORMS.find((p) => p.id === 'android');
-  const windowsPlatform = PLATFORMS.find((p) => p.id === 'windows');
+  const mobilePlatform = PLATFORMS.find((p) => p.id === 'mobile');
 
   const schemaData = {
     '@context': 'https://schema.org',
@@ -23,47 +22,28 @@ export default function JsonLd() {
         '@id': `${SITE_CONFIG.domain}/#website`,
         url: SITE_CONFIG.domain,
         name: 'Scrutium AI App Download Portal',
-        description: 'Official download center for Scrutium AI standalone applications on Android and Windows.',
+        description: 'Official download center for Scrutium standalone applications.',
         publisher: {
           '@id': `${SITE_CONFIG.domain}/#organization`,
         },
       },
       {
         '@type': 'SoftwareApplication',
-        name: 'Scrutium AI for Android',
-        operatingSystem: 'Android 9.0 and higher',
+        name: 'Scrutium AI Mobile App',
+        operatingSystem: 'Mobile OS',
         applicationCategory: 'ProductivityApplication',
-        softwareVersion: androidPlatform?.version || '1.2.0',
-        fileSize: androidPlatform?.fileSize || '42.8 MB',
-        datePublished: '2026-10-01',
+        softwareVersion: mobilePlatform?.version || '3.4.2',
         downloadUrl:
-          androidPlatform?.downloadUrl.startsWith('http')
-            ? androidPlatform.downloadUrl
-            : `${SITE_CONFIG.domain}${androidPlatform?.downloadUrl}`,
+          mobilePlatform?.downloadUrl?.startsWith('http')
+            ? mobilePlatform.downloadUrl
+            : `${SITE_CONFIG.domain}${mobilePlatform?.downloadUrl}`,
         offers: {
           '@type': 'Offer',
           price: '0',
           priceCurrency: 'USD',
         },
         description:
-          'Official Scrutium AI universal APK for Android smartphones and tablets.',
-      },
-      {
-        '@type': 'SoftwareApplication',
-        name: 'Scrutium AI for Windows',
-        operatingSystem: 'Windows 10, Windows 11 (64-bit)',
-        applicationCategory: 'ProductivityApplication',
-        softwareVersion: windowsPlatform?.version || '1.2.0',
-        fileSize: windowsPlatform?.fileSize || '78.4 MB',
-        datePublished: '2026-10-01',
-        downloadUrl: `${SITE_CONFIG.domain}${windowsPlatform?.downloadUrl}`,
-        offers: {
-          '@type': 'Offer',
-          price: '0',
-          priceCurrency: 'USD',
-        },
-        description:
-          'Official Scrutium AI desktop 64-bit installer for Windows 10 and 11.',
+          'Official Scrutium AI standalone APK for Mobile devices.',
       },
     ],
   };

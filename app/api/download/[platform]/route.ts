@@ -15,30 +15,24 @@ export async function GET(
   }
 
   // Redirect directly to official external binary release
-  if (platformConfig.downloadUrl.startsWith('http')) {
+  if (platformConfig.downloadUrl && platformConfig.downloadUrl.startsWith('http')) {
     return NextResponse.redirect(platformConfig.downloadUrl, 302);
   }
 
-  const fileName = platformConfig.fileName || `scrutium-${platformConfig.id}-v${platformConfig.version}.bin`;
+  const fileName = platformConfig.fileName || `scrutium.apk`;
   
-  // Package stub payload indicating verified Scrutium release metadata
+  // Package manifest
   const packagePayload = `=====================================================
-SCRUTIUM AI OFFICIAL RELEASE MANIFEST & PACKAGE
+SCRUTIUM AI OFFICIAL RELEASE MANIFEST
 =====================================================
 Application: Scrutium AI
 Platform: ${platformConfig.name} (${platformConfig.subtitle})
 Version: ${platformConfig.version}
-Release Date: ${platformConfig.releaseDate}
-Format: ${platformConfig.format}
+Package: ${fileName}
 Official Source: https://download.scrutium.com
-SHA-256 Checksum: ${platformConfig.sha256}
 Documentation: https://documentation.scrutium.com
 Web Application: https://scrutium.com
 =====================================================
-
-To verify binary integrity, run:
-  Windows: certutil -hashfile ${fileName} SHA256
-  Linux/macOS: sha256sum ${fileName}
 
 Official Scrutium AI distribution. Copyright X-ion, Inc. All rights reserved.
 `;

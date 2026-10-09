@@ -22,12 +22,12 @@ Every "Try on Web" link navigates directly to `https://scrutium.com`. All "Docum
 
 ## 2. Supported Platforms & Release Manifest
 
-| Platform | Format | Version | Size | Checksum (SHA-256) | Download Link |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **Android** | Universal APK | `v1.2.0` | 42.8 MB | `9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08` | [Direct APK Download](https://github.com/X-ions/download-scrutium/releases/download/scrutium-mobile/scrutium.apk) |
-| **Windows** | 64-bit `.exe` Setup | `v1.2.0` | 78.4 MB | `5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8` | [Direct Installer](/api/download/windows) |
+| Platform | Format | Package | Version | Status / Download |
+| :--- | :--- | :--- | :--- | :--- |
+| **Mobile App** | Standalone APK | `scrutium.apk` | `3.4.2` | [Direct APK Download](https://github.com/X-ions/download-scrutium/releases/download/scrutium-mobile/scrutium.apk) |
+| **Desktop (Windows & Mac)** | Native Standalone | — | — | *Coming Soon (In Development)* |
 
-*Note for macOS, Linux, and iOS users: The complete Scrutium AI workspace runs in any modern web browser at [https://scrutium.com](https://scrutium.com).*
+*Desktop applications for Windows and macOS are currently in private development. Use Scrutium immediately in any modern web browser at [https://scrutium.com](https://scrutium.com).*
 
 Release parameters are centralized in [`lib/download-config.ts`](lib/download-config.ts).
 
@@ -106,49 +106,55 @@ npm run build
 
 ---
 
-## 6. Production Deployment & DNS Setup
+## 6. Cloudflare Production Deployment & DNS Setup
 
-To connect `download.scrutium.com` to your deployed hosting service:
+To deploy this project to production and bind `download.scrutium.com` on Cloudflare:
 
-### Step 1: Deploy the Build
-Deploy the standalone Next.js container to your hosting infrastructure (Cloud Run, Vercel, AWS ECS, or VPS).
+### Method A: Cloudflare Pages Deployment (Recommended)
 
-Configure the environment variable:
-```env
-APP_URL=https://download.scrutium.com
-```
+1. **Push your repository** to GitHub, GitLab, or connect directly.
+2. In the **Cloudflare Dashboard**, navigate to **Compute (Workers & Pages)** $\rightarrow$ **Create application** $\rightarrow$ **Pages** $\rightarrow$ **Connect to Git**.
+3. Select your repository and configure the build settings:
+   - **Framework preset**: `Next.js`
+   - **Build command**: `npm run build`
+   - **Build output directory**: `.next` (or standalone)
+4. Add the **Environment Variable**:
+   ```env
+   APP_URL = https://download.scrutium.com
+   NODE_VERSION = 20
+   ```
+5. Click **Save and Deploy**.
+6. Once deployed, navigate to **Custom domains** $\rightarrow$ **Set up a custom domain** $\rightarrow$ enter `download.scrutium.com`. Cloudflare will automatically route DNS and generate SSL/TLS certificates.
 
-### Step 2: Configure Registrar DNS Records
-In your DNS management dashboard for `scrutium.com`, add a CNAME record:
+---
 
-| Record Type | Host / Name | Target / Destination | TTL |
-| :--- | :--- | :--- | :--- |
-| **CNAME** | `download` | `cname.your-host.com` *(or Cloud Run domain mapping)* | Auto / 300 |
+### Method B: Cloudflare DNS with Container / VPS Ingress (Cloud Run / AWS / Docker)
 
-### Step 3: SSL / HTTPS
-Enable managed TLS/SSL certificate provisioning. All HTTP traffic should automatically redirect to `https://download.scrutium.com`.
+If you are running the Next.js standalone container on a cloud host (Google Cloud Run, AWS, VPS):
 
-### Step 4: Submit Sitemap to Google Search Console
+1. **Add CNAME Record in Cloudflare DNS for `scrutium.com`**:
+   | Type | Name | Target / Content | Proxy status | TTL |
+   | :--- | :--- | :--- | :--- | :--- |
+   | **CNAME** | `download` | `[your-cloud-run-domain-or-cname]` | Proxied (Orange Cloud) | Auto |
+
+2. **Configure SSL/TLS in Cloudflare**:
+   - Go to **SSL/TLS** $\rightarrow$ **Overview** $\rightarrow$ set to **Full (strict)**.
+   - Go to **SSL/TLS** $\rightarrow$ **Edge Certificates** $\rightarrow$ turn on **Always Use HTTPS**.
+
+3. **Performance & Security Tuning**:
+   - Under **Speed** $\rightarrow$ **Optimization**, enable **Brotli** compression.
+   - Under **Network**, enable **HTTP/3 (with QUIC)** and **0-RTT**.
+
+---
+
+### Step 5: Google Search Console Submission
+
 Once DNS resolves:
 1. Add the domain property `https://download.scrutium.com` in Google Search Console.
-2. Submit the XML sitemap URL: `https://download.scrutium.com/sitemap.xml`.
+2. Submit the dynamic sitemap URL: `https://download.scrutium.com/sitemap.xml`.
 
 ---
 
-## 7. Cryptographic Binary Verification
-
-### Windows (PowerShell / Command Prompt):
-```powershell
-certutil -hashfile scrutium-ai-setup-v1.2.0.exe SHA256
-```
-
-### Android / Linux / macOS (Terminal):
-```bash
-sha256sum scrutium.apk
-```
-
----
-
-## 8. License & Copyright
+## 7. License & Copyright
 
 Copyright © 2026 X-ion, Inc. All rights reserved.
